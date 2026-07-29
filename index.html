@@ -393,7 +393,7 @@
 
   <header class="app">
     <div class="hdr-title">
-      <h1><span class="t1">Automated Traffic Ticket Notifier</span><span class="t2">using AI Builder &amp; Power Automate <span style="opacity:.55;font-weight:500">&middot; build v2.6</span></span></h1>
+      <h1><span class="t1">Automated Traffic Ticket Notifier</span><span class="t2">using AI Builder &amp; Power Automate <span style="opacity:.55;font-weight:500">&middot; build v2.7</span></span></h1>
     </div>
     <div class="hdr-right">
       <span id="badgeOcr" class="badge warn hide">OCR mode</span>
@@ -778,9 +778,10 @@ const VIOLATION_TYPES = [
 const SCHOOL_ZONE_RE = [/어\s*린\s*이\s*보\s*호\s*구\s*역/, /스\s*쿨\s*존/, /school\s*zone/i];
 
 function violationLabel(t, schoolZone){
+  // English-only: this string goes into the notification e-mail, whose
+  // audience (LR reviewers) is international. The UI select is English too.
   if (!t) return "";
-  const base = t.key === "other" ? t.en : t.ko + " (" + t.en + ")";
-  return base + (schoolZone ? " · 어린이보호구역 / school zone" : "");
+  return t.en + (schoolZone ? " · school zone" : "");
 }
 
 /* Keywords on the labelled 위반내용 line count far more than the same keyword

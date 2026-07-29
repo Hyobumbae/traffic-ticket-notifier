@@ -130,7 +130,7 @@
   /* ---------- layout: rail + two working columns, all inside one screen ---------- */
   .cols{flex:1 1 auto;min-height:0;display:grid;
     grid-template-columns:96px 330px minmax(0,1fr);
-    grid-template-rows:repeat(4,minmax(0,1fr)) minmax(0,1.55fr);
+    grid-template-rows:minmax(0,.95fr) minmax(0,.9fr) minmax(0,.9fr) minmax(0,1.3fr) minmax(0,1.5fr);
     gap:8px 10px;overflow:hidden}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
     box-shadow:var(--shadow);display:flex;flex-direction:column;min-height:0;overflow:hidden}
@@ -186,7 +186,7 @@
   .logo.done .lgname.ol,.logo.run .lgname.ol{color:#0f4b9b}
 
   /* ---------- action column: Power Automate designer canvas ---------- */
-  .acts{grid-column:2;grid-row:1/-1;display:grid;grid-template-rows:repeat(4,1fr) 1.55fr;gap:8px;
+  .acts{grid-column:2;grid-row:1/-1;display:grid;grid-template-rows:.95fr .9fr .9fr 1.3fr 1.5fr;gap:8px;
     padding:7px 14px;background:#f5f6f8;border:1px solid var(--line);border-radius:var(--radius);
     box-shadow:var(--shadow);min-width:0;overflow:hidden;position:relative;
     background-image:radial-gradient(#d9dee6 1px,transparent 1px);background-size:13px 13px}
@@ -437,7 +437,7 @@
 
   <header class="app">
     <div class="hdr-title">
-      <h1><span class="t1">Automated Traffic Ticket Notifier</span><span class="t2">using AI Builder &amp; Power Automate <span style="opacity:.55;font-weight:500">&middot; build v2.13</span></span></h1>
+      <h1><span class="t1">Automated Traffic Ticket Notifier</span><span class="t2">using AI Builder &amp; Power Automate <span style="opacity:.55;font-weight:500">&middot; build v2.14</span></span></h1>
     </div>
     <div class="hdr-right">
       <span id="badgeOcr" class="badge warn hide">OCR mode</span>

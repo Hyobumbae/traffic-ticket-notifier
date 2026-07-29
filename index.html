@@ -40,7 +40,9 @@
   #inEmail.guide{--gb:14px;--gs:3px}
   @media print{.guide{animation:none;box-shadow:none}}
   .introw{display:flex;gap:14px;flex:1 1 auto;min-height:0;align-items:stretch}
-  .trialcol{flex:1 1 0;display:flex;flex-direction:column;gap:8px;min-width:0}
+  .trialcol{flex:1 1 0;display:flex;flex-direction:column;gap:8px;min-width:0;
+    border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;
+    transition:opacity .35s,filter .35s}
   .trialcol .drop{flex:1 1 auto}
   .drop{flex:1 1 0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;text-align:center}
   .dmain{display:flex;align-items:center;gap:9px}
@@ -48,12 +50,27 @@
   .dhint b{color:#1E2761;font-weight:600}
   .dtxt{font-size:15px;font-weight:400;color:var(--ink-2)}
   .trial{flex:1 1 0;display:flex;flex-direction:column;justify-content:center;gap:8px;
-    border-left:1px dashed var(--line);padding-left:14px}
+    border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;
+    transition:opacity .35s,filter .35s}
+  /* once a route is taken, the other route greys out */
+  body.route-sample .trialcol{opacity:.35;filter:grayscale(1)}
+  body.route-file .trial{opacity:.35;filter:grayscale(1)}
   .ttl2{font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3)}
   .tbtns{display:flex;gap:10px;flex:1 1 auto;align-items:stretch}
   .btn.tbig{flex:1 1 0;font-size:15.5px;font-weight:700;padding:14px 10px;
     border-width:1.5px;border-color:#b9c6da;color:#1E2761}
   .btn.tbig:hover{background:#eef2f9;border-color:var(--brand)}
+  /* downward flow arrows between the stage cards; fa-1 slides under the
+     active route (left = file, right = samples) */
+  .cols section.card{position:relative}
+  .flowarrow{position:absolute;left:50%;bottom:-13px;transform:translateX(-50%);z-index:6;
+    width:24px;height:24px;border-radius:50%;background:#fff;border:1.5px solid var(--line);
+    display:flex;align-items:center;justify-content:center;color:#b6c0d0;
+    transition:left .5s ease,color .2s,border-color .2s,background .2s}
+  .flowarrow svg{display:block}
+  .flowarrow.on{border-color:var(--brand);background:var(--brand);color:#fff}
+  body.route-sample #fa-1{left:74%}
+  body.route-file #fa-1{left:26%}
   /* company ribbon pinned to the canvas top-left, like a hanging bookmark */
   .ribbon{position:absolute;top:0;left:30px;height:128px;width:auto;z-index:5;
     filter:drop-shadow(0 3px 5px rgba(16,24,40,.25))}
@@ -401,7 +418,7 @@
 
   <header class="app">
     <div class="hdr-title">
-      <h1><span class="t1">Automated Traffic Ticket Notifier</span><span class="t2">using AI Builder &amp; Power Automate <span style="opacity:.55;font-weight:500">&middot; build v2.11</span></span></h1>
+      <h1><span class="t1">Automated Traffic Ticket Notifier</span><span class="t2">using AI Builder &amp; Power Automate <span style="opacity:.55;font-weight:500">&middot; build v2.12</span></span></h1>
     </div>
     <div class="hdr-right">
       <span id="badgeOcr" class="badge warn hide">OCR mode</span>
@@ -451,7 +468,6 @@
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
                   </svg>
-                  <span class="dtxt">Drop a file in .pdf</span>
                 </span>
                 <span class="dhint">Download the <b>Sample Ticket for Trial</b> (top right) and drop it here.</span>
               </div>
@@ -465,6 +481,7 @@
             </div>
           </div>          <input type="file" id="fileInput" accept="application/pdf,.pdf" style="display:none">
         </div>
+        <div class="flowarrow" id="fa-1" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
       </section>
 
     <div class="logo duo" id="lg-2">
@@ -478,6 +495,7 @@
           <div class="prog" id="prog"><i id="progBar"></i></div>
           <div class="proglbl" id="progLbl"></div>
         </div>
+        <div class="flowarrow" id="fa-2" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
       </section>
 
     <div class="logo duo" id="lg-3">
@@ -501,6 +519,7 @@
             </div>
           </div>
         </div>
+        <div class="flowarrow" id="fa-3" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
       </section>
 
     <div class="logo duo" id="lg-4">
@@ -516,6 +535,7 @@
           </table>
           <div class="kv" style="margin-top:9px">Click any row to assign that driver manually.</div>
         </div>
+        <div class="flowarrow" id="fa-4" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
       </section>
 
     <div class="logo duo" id="lg-5">
@@ -726,6 +746,15 @@ function stageSet(n, state, detail){
     const d = $("stgd-" + n);
     if (d) d.textContent = detail;
   }
+  // the arrow above stage n lights up while that stage runs or is done
+  const ar = $("fa-" + (n - 1));
+  if (ar) ar.classList.toggle("on", state === "run" || state === "done");
+}
+
+/* Which intake route was taken; the unused route greys out (CSS above). */
+function setRoute(r){
+  document.body.classList.toggle("route-sample", r === "sample");
+  document.body.classList.toggle("route-file",   r === "file");
 }
 function stagesReset(){
   for (let n = 1; n <= 5; n++) stageSet(n, null, STAGE_IDLE[n]);
@@ -1387,6 +1416,7 @@ function loadFile(file){
     alert("Please choose a PDF file.");
     return;
   }
+  setRoute("file");
   const fr = new FileReader();
   fr.onload = () => processPdf(new Uint8Array(fr.result), file.name,
                                (file.size / 1024).toFixed(0) + " KB", false);
@@ -1449,10 +1479,12 @@ const SAMPLE_PARK_TXT = [
 ].join("\n");
 
 if ($("btnSample")) $("btnSample").onclick = () => {
+  setRoute("sample");
   const b = b64ToBytes(SAMPLE_TEXT_PDF_B64);
   processPdf(b, "sample-ticket_text-layer.pdf", (b.length / 1024).toFixed(0) + " KB · embedded sample", false, SAMPLE_TEXT_TXT);
 };
 if ($("btnSamplePark")) $("btnSamplePark").onclick = () => {
+  setRoute("sample");
   const b = b64ToBytes(SAMPLE_PARK_PDF_B64);
   processPdf(b, "sample-ticket_illegal-parking.pdf", (b.length / 1024).toFixed(0) + " KB · embedded sample", false, SAMPLE_PARK_TXT);
 };
@@ -1552,7 +1584,7 @@ $("btnReset").onclick = () => {
   $("result").className = "result";
   showProgress(false);
   stagesReset();
-  stagesReset();
+  setRoute(null);
   runMatch();
 };
 

@@ -44,8 +44,10 @@
     padding:4px 16px 4px 2px;
     transition:opacity .35s,filter .35s}
   .trialcol .drop{flex:1 1 auto}
-  .drop{flex:1 1 0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;text-align:center}
-  .dmain{display:flex;align-items:center;gap:9px}
+  .drop{flex:1 1 0;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:9px;
+    text-align:left;min-height:0;overflow:hidden}
+  .dmain{display:flex;align-items:center;flex:0 0 auto}
+  .dmain svg{width:15px;height:15px}
   .dhint{font-size:11px;color:var(--ink-3);line-height:1.4;max-width:34em}
   .dhint b{color:#1E2761;font-weight:600}
   .dtxt{font-size:13.5px;font-weight:400;color:var(--ink-2)}
@@ -439,7 +441,7 @@
 
   <header class="app">
     <div class="hdr-title">
-      <h1><span class="t1">Automated Traffic Ticket Notifier</span><span class="t2">using AI Builder &amp; Power Automate <span style="opacity:.55;font-weight:500">&middot; build v2.19</span></span></h1>
+      <h1><span class="t1">Automated Traffic Ticket Notifier</span><span class="t2">using AI Builder &amp; Power Automate <span style="opacity:.55;font-weight:500">&middot; build v2.20</span></span></h1>
     </div>
     <div class="hdr-right">
       <span id="badgeOcr" class="badge warn hide">OCR mode</span>

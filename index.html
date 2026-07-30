@@ -23,7 +23,7 @@
      whole canvas is scaled as one unit to fit the window — boxes never reflow,
      they only appear bigger or smaller. The same canvas is scaled to one A4
      landscape sheet when printed. */
-  .wrap{width:1180px;height:860px;padding:12px 16px;
+  .wrap{width:1412px;height:860px;padding:12px 16px;
     display:flex;flex-direction:column;gap:9px;
     position:absolute;left:50%;top:0;
     transform:translateX(-50%) scale(var(--fit,1));transform-origin:top center}
@@ -91,6 +91,15 @@
   .olfrom b{color:var(--ink-2);font-weight:600}
   .olbody{flex:1 1 auto;min-height:0;overflow:auto;padding:9px 12px;font-family:var(--mono);
     font-size:10.5px;line-height:1.55;white-space:pre-wrap;color:var(--ink-2);background:#fff}
+  /* ---- 4th column: stage explanations ---- */
+  .expl{background:#f5f6f8;border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:10px 12px;display:flex;flex-direction:column;gap:5px;
+    min-width:0;overflow:hidden;transition:border-color .2s,background .2s}
+  .expl b{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-weight:800}
+  .expl p{font-size:11px;line-height:1.55;color:var(--ink-2);margin:0}
+  .expl.run{border-color:var(--brand);background:#f3f7ff}
+  .expl.run b{color:var(--brand-ink)}
+  .expl.done b{color:var(--ok)}
   body.route-sample #fa-1{left:74%}
   body.route-file #fa-1{left:26%}
   /* company ribbon pinned to the canvas top-left, like a hanging bookmark */
@@ -133,7 +142,7 @@
 
   /* ---------- layout: rail + two working columns, all inside one screen ---------- */
   .cols{flex:1 1 auto;min-height:0;display:grid;
-    grid-template-columns:96px 330px minmax(0,1fr);
+    grid-template-columns:96px 330px minmax(0,1fr) 224px;
     grid-template-rows:minmax(0,.9fr) minmax(0,.95fr) minmax(0,.95fr) minmax(0,1.22fr) minmax(0,1.62fr);
     gap:8px 10px;overflow:hidden}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
@@ -442,7 +451,7 @@
 
   <header class="app">
     <div class="hdr-title">
-      <h1><span class="t1">Automated Traffic Ticket Notifier</span><span class="t2">using AI Builder &amp; Power Automate <span style="opacity:.55;font-weight:500">&middot; build v2.22</span></span></h1>
+      <h1><span class="t1">Automated Traffic Ticket Notifier</span><span class="t2">using AI Builder &amp; Power Automate <span style="opacity:.55;font-weight:500">&middot; build v2.23</span></span></h1>
     </div>
     <div class="hdr-right">
       <span id="badgeOcr" class="badge warn hide">OCR mode</span>
@@ -502,6 +511,7 @@
         </div>
         <div class="flowarrow" id="fa-1" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="4" x2="12" y2="17"/><polyline points="6 12 12 19 18 12"/></svg></div>
       </section>
+      <aside class="expl" id="ex-1"><b>Why this matters</b><p>In production the only manual step is dropping a ticket PDF into a SharePoint folder — a Power Automate trigger picks it up within a minute.</p></aside>
 
     <div class="logo duo" id="lg-2">
       <span class="lghead"><b class="lgno">2</b><span class="lgttl">Text extraction</span><span class="stgst2" id="stgs-2">·</span></span>
@@ -516,6 +526,7 @@
         </div>
         <div class="flowarrow" id="fa-2" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="4" x2="12" y2="17"/><polyline points="6 12 12 19 18 12"/></svg></div>
       </section>
+      <aside class="expl" id="ex-2"><b>Behind the scenes</b><p>AI Builder’s prebuilt OCR model reads the whole notice, digital or scanned. The demo replays that recognition pass.</p></aside>
 
     <div class="logo duo" id="lg-3">
       <span class="lghead"><b class="lgno">3</b><span class="lgttl">Parse & classify</span><span class="stgst2" id="stgs-3">·</span></span>
@@ -540,6 +551,7 @@
         </div>
         <div class="flowarrow" id="fa-3" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="4" x2="12" y2="17"/><polyline points="6 12 12 19 18 12"/></svg></div>
       </section>
+      <aside class="expl" id="ex-3"><b>Behind the scenes</b><p>Flow expressions isolate the plate (licence-plate pattern), pick the payment deadline (“the latest date wins”) and classify the offence by keywords.</p></aside>
 
     <div class="logo duo" id="lg-4">
       <span class="lghead"><b class="lgno">4</b><span class="lgttl">Driver lookup</span><span class="stgst2" id="stgs-4">·</span></span>
@@ -556,6 +568,7 @@
         </div>
         <div class="flowarrow" id="fa-4" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="4" x2="12" y2="17"/><polyline points="6 12 12 19 18 12"/></svg></div>
       </section>
+      <aside class="expl" id="ex-4"><b>Behind the scenes</b><p>The plate is matched against the employee-vehicle list in SharePoint via a server-side OData query — exactly one row, or nothing.</p></aside>
 
     <div class="logo duo" id="lg-5">
       <span class="lghead"><b class="lgno">5</b><span class="lgttl">Notify driver</span><span class="stgst2" id="stgs-5">·</span></span>
@@ -576,6 +589,7 @@
           <div class="result" id="result"></div>
         </div>
       </section>
+      <aside class="expl" id="ex-5"><b>The payoff</b><p>A matched driver is e-mailed automatically via Outlook, details filled in. No match, no mail — the safe failure mode for personal data.</p></aside>
   </div>
 </div>
 
@@ -754,6 +768,11 @@ function stageSet(n, state, detail){
   // the arrow above stage n lights up while that stage runs or is done
   const ar = $("fa-" + (n - 1));
   if (ar) ar.classList.toggle("on", state === "run" || state === "done");
+  const ex = $("ex-" + n);
+  if (ex){
+    ex.classList.remove("run","done","fail");
+    if (state) ex.classList.add(state);
+  }
 }
 
 /* ---- automatic driver notification (stage 5) ----------------------------
@@ -1548,7 +1567,7 @@ $("btnReset").onclick = () => {
 stagesReset();
 /* scale the fixed 1360x930 canvas to the window without reflowing it */
 function fitStage(){
-  const s = Math.min(window.innerWidth / 1196, window.innerHeight / 872, 1.35);
+  const s = Math.min(window.innerWidth / 1428, window.innerHeight / 872, 1.35);
   document.documentElement.style.setProperty("--fit", s.toFixed(4));
 }
 /* Guidance: glow whatever the user should touch next.

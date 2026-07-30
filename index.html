@@ -95,11 +95,17 @@
   .expl{background:#f5f6f8;border:1px solid var(--line);border-radius:var(--radius);
     box-shadow:var(--shadow);padding:10px 12px;display:flex;flex-direction:column;gap:5px;
     min-width:0;overflow:hidden;transition:border-color .2s,background .2s}
-  .expl b{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-weight:800}
-  .expl p{font-size:11px;line-height:1.55;color:var(--ink-2);margin:0}
+  .expl{justify-content:center;align-items:flex-start;gap:6px}
+  .exstep{font-size:9.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3)}
+  .excon{font-size:10.5px;font-weight:700;padding:2px 9px;border-radius:20px;background:#eef1f6;color:#3d4757}
+  .excon.c-sp{background:#e2f1f0;color:#02736f}
+  .excon.c-ai{background:#eceefc;color:#3a56d4}
+  .excon.c-pa{background:#e7eefc;color:#1a4fd0}
+  .excon.c-li{background:#fbeae2;color:#a03a12}
+  .excon.c-ol{background:#e6eefa;color:#0f4b9b}
+  .exwhat{font-size:12.5px;font-weight:700;line-height:1.35;color:#1c2330}
   .expl.run{border-color:var(--brand);background:#f3f7ff}
-  .expl.run b{color:var(--brand-ink)}
-  .expl.done b{color:var(--ok)}
+  .expl.done .exstep{color:var(--ok)}
   body.route-sample #fa-1{left:74%}
   body.route-file #fa-1{left:26%}
   /* company ribbon pinned to the canvas top-left, like a hanging bookmark */
@@ -451,7 +457,7 @@
 
   <header class="app">
     <div class="hdr-title">
-      <h1><span class="t1">Automated Traffic Ticket Notifier</span><span class="t2">using AI Builder &amp; Power Automate <span style="opacity:.55;font-weight:500">&middot; build v2.23</span></span></h1>
+      <h1><span class="t1">Automated Traffic Ticket Notifier</span><span class="t2">using AI Builder &amp; Power Automate <span style="opacity:.55;font-weight:500">&middot; build v2.25</span></span></h1>
     </div>
     <div class="hdr-right">
       <span id="badgeOcr" class="badge warn hide">OCR mode</span>
@@ -511,7 +517,7 @@
         </div>
         <div class="flowarrow" id="fa-1" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="4" x2="12" y2="17"/><polyline points="6 12 12 19 18 12"/></svg></div>
       </section>
-      <aside class="expl" id="ex-1"><b>Why this matters</b><p>In production the only manual step is dropping a ticket PDF into a SharePoint folder — a Power Automate trigger picks it up within a minute.</p></aside>
+      <aside class="expl" id="ex-1"><span class="exstep">Step 1 · Ticket intake</span><span class="excon c-sp">SharePoint</span><span class="exwhat">New ticket PDF detected → flow starts</span></aside>
 
     <div class="logo duo" id="lg-2">
       <span class="lghead"><b class="lgno">2</b><span class="lgttl">Text extraction</span><span class="stgst2" id="stgs-2">·</span></span>
@@ -526,7 +532,7 @@
         </div>
         <div class="flowarrow" id="fa-2" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="4" x2="12" y2="17"/><polyline points="6 12 12 19 18 12"/></svg></div>
       </section>
-      <aside class="expl" id="ex-2"><b>Behind the scenes</b><p>AI Builder’s prebuilt OCR model reads the whole notice, digital or scanned. The demo replays that recognition pass.</p></aside>
+      <aside class="expl" id="ex-2"><span class="exstep">Step 2 · Text extraction</span><span class="excon c-ai">AI Builder</span><span class="exwhat">Full notice text read by OCR</span></aside>
 
     <div class="logo duo" id="lg-3">
       <span class="lghead"><b class="lgno">3</b><span class="lgttl">Parse & classify</span><span class="stgst2" id="stgs-3">·</span></span>
@@ -551,7 +557,7 @@
         </div>
         <div class="flowarrow" id="fa-3" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="4" x2="12" y2="17"/><polyline points="6 12 12 19 18 12"/></svg></div>
       </section>
-      <aside class="expl" id="ex-3"><b>Behind the scenes</b><p>Flow expressions isolate the plate (licence-plate pattern), pick the payment deadline (“the latest date wins”) and classify the offence by keywords.</p></aside>
+      <aside class="expl" id="ex-3"><span class="exstep">Step 3 · Parse & classify</span><span class="excon c-pa">Power Automate</span><span class="exwhat">Plate · deadline · offence pulled out</span></aside>
 
     <div class="logo duo" id="lg-4">
       <span class="lghead"><b class="lgno">4</b><span class="lgttl">Driver lookup</span><span class="stgst2" id="stgs-4">·</span></span>
@@ -568,7 +574,7 @@
         </div>
         <div class="flowarrow" id="fa-4" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="4" x2="12" y2="17"/><polyline points="6 12 12 19 18 12"/></svg></div>
       </section>
-      <aside class="expl" id="ex-4"><b>Behind the scenes</b><p>The plate is matched against the employee-vehicle list in SharePoint via a server-side OData query — exactly one row, or nothing.</p></aside>
+      <aside class="expl" id="ex-4"><span class="exstep">Step 4 · Driver lookup</span><span class="excon c-li">SharePoint List</span><span class="exwhat">Plate matched to the registered driver</span></aside>
 
     <div class="logo duo" id="lg-5">
       <span class="lghead"><b class="lgno">5</b><span class="lgttl">Notify driver</span><span class="stgst2" id="stgs-5">·</span></span>
@@ -589,7 +595,7 @@
           <div class="result" id="result"></div>
         </div>
       </section>
-      <aside class="expl" id="ex-5"><b>The payoff</b><p>A matched driver is e-mailed automatically via Outlook, details filled in. No match, no mail — the safe failure mode for personal data.</p></aside>
+      <aside class="expl" id="ex-5"><span class="exstep">Step 5 · Notify driver</span><span class="excon c-ol">Outlook</span><span class="exwhat">Notice e-mailed automatically · zero touch</span></aside>
   </div>
 </div>
 

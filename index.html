@@ -72,6 +72,8 @@
     transition:left .5s ease,color .2s,border-color .2s,background .2s}
   .flowarrow svg{display:block}
   .flowarrow.on{border-color:var(--brand);background:var(--brand);color:#fff}
+  .flowarrow.live{animation:fapulse 1.1s ease-in-out infinite}
+  @keyframes fapulse{0%,100%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.25)}}
   /* ---- stage 5: automatic notification + simulated Outlook window ---- */
   .anstate{font-size:11.5px;color:var(--ink-3);padding:6px 2px}
   .anstate.busy{color:var(--brand-ink)}
@@ -94,13 +96,15 @@
   /* ---- 4th column: stage explanations ---- */
   .expl{background:#fff;border:1px solid #cdd5e1;border-left-width:5px;border-radius:var(--radius);
     box-shadow:0 1px 4px rgba(16,24,40,.10);padding:10px 13px;display:flex;flex-direction:column;gap:6px;
-    min-width:0;overflow:hidden;transition:border-color .2s,background .2s}
+    min-width:0;overflow:hidden;justify-content:center;
+    opacity:0;transform:translateY(8px);
+    transition:opacity .75s ease,transform .75s ease}
+  .expl.on{opacity:1;transform:none}
   #ex-1{border-left-color:#1A9BA1}
   #ex-2{border-left-color:#8661c5}
   #ex-3{border-left-color:#2b7bff}
   #ex-4{border-left-color:#F6870F}
   #ex-5{border-left-color:#0f6cbd}
-  .expl{justify-content:center;align-items:flex-start;gap:6px}
   .exstep{font-size:12px;font-weight:700;color:#4a5568}
   .excon{font-size:11.5px;font-weight:700;padding:3px 11px;border-radius:20px;background:#eef1f6;color:#3d4757}
   .excon.c-sp{background:#e2f1f0;color:#02736f}
@@ -109,8 +113,6 @@
   .excon.c-li{background:#fbeae2;color:#a03a12}
   .excon.c-ol{background:#e6eefa;color:#0f4b9b}
   .exwhat{font-size:13.5px;font-weight:600;line-height:1.55;color:#232b38}
-  .expl.run{border-color:var(--brand);background:#f3f7ff}
-  .expl.done .exstep{color:var(--ok)}
   body.route-sample #fa-1{left:74%}
   body.route-file #fa-1{left:26%}
   /* company ribbon pinned to the canvas top-left, like a hanging bookmark */
@@ -462,7 +464,7 @@
 
   <header class="app">
     <div class="hdr-title">
-      <h1><span class="t1">Automated Traffic Ticket Notifier</span><span class="t2">using AI Builder &amp; Power Automate <span style="opacity:.55;font-weight:500">&middot; build v2.29</span></span></h1>
+      <h1><span class="t1">Automated Traffic Ticket Notifier</span><span class="t2">using AI Builder &amp; Power Automate <span style="opacity:.55;font-weight:500">&middot; build v2.31</span></span></h1>
     </div>
     <div class="hdr-right">
       <span id="badgeOcr" class="badge warn hide">OCR mode</span>
@@ -522,7 +524,7 @@
         </div>
         <div class="flowarrow" id="fa-1" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="4" x2="12" y2="17"/><polyline points="6 12 12 19 18 12"/></svg></div>
       </section>
-      <aside class="expl" id="ex-1"><span class="excon c-sp">SharePoint</span><span class="exwhat">That was the only thing a human does — from here, the flow runs itself.</span></aside>
+      <aside class="expl" id="ex-1"><span class="excon c-sp">SharePoint</span><span class="exwhat">A ticket PDF arrives — the only human step. The flow takes over.</span></aside>
 
     <div class="logo duo" id="lg-2">
       <span class="lghead"><b class="lgno">2</b><span class="lgttl">Text extraction</span><span class="stgst2" id="stgs-2">·</span></span>
@@ -537,7 +539,7 @@
         </div>
         <div class="flowarrow" id="fa-2" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="4" x2="12" y2="17"/><polyline points="6 12 12 19 18 12"/></svg></div>
       </section>
-      <aside class="expl" id="ex-2"><span class="excon c-ai">AI Builder</span><span class="exwhat">The AI reads the ticket like a person would — even a rough scan is fine.</span></aside>
+      <aside class="expl" id="ex-2"><span class="excon c-ai">AI Builder</span><span class="exwhat">The uploaded notice is read by AI OCR — its full text is captured.</span></aside>
 
     <div class="logo duo" id="lg-3">
       <span class="lghead"><b class="lgno">3</b><span class="lgttl">Parse & classify</span><span class="stgst2" id="stgs-3">·</span></span>
@@ -562,7 +564,7 @@
         </div>
         <div class="flowarrow" id="fa-3" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="4" x2="12" y2="17"/><polyline points="6 12 12 19 18 12"/></svg></div>
       </section>
-      <aside class="expl" id="ex-3"><span class="excon c-pa">Power Automate</span><span class="exwhat">It picks out what matters: whose car, what happened, and by when to pay.</span></aside>
+      <aside class="expl" id="ex-3"><span class="excon c-pa">Power Automate</span><span class="exwhat">From that text, the essentials are listed: plate, offence, payment deadline.</span></aside>
 
     <div class="logo duo" id="lg-4">
       <span class="lghead"><b class="lgno">4</b><span class="lgttl">Driver lookup</span><span class="stgst2" id="stgs-4">·</span></span>
@@ -579,7 +581,7 @@
         </div>
         <div class="flowarrow" id="fa-4" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="4" x2="12" y2="17"/><polyline points="6 12 12 19 18 12"/></svg></div>
       </section>
-      <aside class="expl" id="ex-4"><span class="excon c-li">SharePoint List</span><span class="exwhat">No need to ask around — the responsible driver comes straight from the company list.</span></aside>
+      <aside class="expl" id="ex-4"><span class="excon c-li">SharePoint List</span><span class="exwhat">That plate is looked up — the responsible driver is found in the company list.</span></aside>
 
     <div class="logo duo" id="lg-5">
       <span class="lghead"><b class="lgno">5</b><span class="lgttl">Notify driver</span><span class="stgst2" id="stgs-5">·</span></span>
@@ -600,7 +602,7 @@
           <div class="result" id="result"></div>
         </div>
       </section>
-      <aside class="expl" id="ex-5"><span class="excon c-ol">Outlook</span><span class="exwhat">And that’s it. The notice is already in the driver’s inbox — nobody typed a thing.</span></aside>
+      <aside class="expl" id="ex-5"><span class="excon c-ol">Outlook</span><span class="exwhat">And the notice lands in that driver’s inbox — nobody typed a thing.</span></aside>
   </div>
 </div>
 
@@ -776,13 +778,20 @@ function stageSet(n, state, detail){
     const d = $("stgd-" + n);
     if (d) d.textContent = detail;
   }
-  // the arrow above stage n lights up while that stage runs or is done
+  // the arrow above stage n lights up while that stage runs or is done,
+  // and pulses while the hand-over is actually happening
   const ar = $("fa-" + (n - 1));
-  if (ar) ar.classList.toggle("on", state === "run" || state === "done");
-  const ex = $("ex-" + n);
-  if (ex){
-    ex.classList.remove("run","done","fail");
-    if (state) ex.classList.add(state);
+  if (ar){
+    ar.classList.toggle("on", state === "run" || state === "done");
+    ar.classList.toggle("live", state === "run");
+  }
+  if (state === "run" || state === "done"){
+    // the narration follows the flow: show this stage's card, fade the rest
+    document.querySelectorAll(".expl").forEach(e =>
+      e.classList.toggle("on", e.id === "ex-" + n));
+  } else if (!state){
+    const ex = $("ex-" + n);
+    if (ex) ex.classList.remove("on");
   }
 }
 
